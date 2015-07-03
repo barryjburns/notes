@@ -1,13 +1,5 @@
 #!/bin/bash
 
-output="$(git status)";
+if [ "$(git status)" == "" ]; then exit; fi
 
-if [ "$output" == "" ]; then exit; fi
-
-if echo "$output" | grep 'modified:'; then
-  echo "$output" | sed -ne 's/^\tmodified:   //gp' | xargs git add;
-fi;
-
-if echo "$output" | grep 'new file:'; then
-  echo "$output" | sed -ne 's/\tnew file:   //gp' | xargs git add;
-fi;
+git status | sed -ne 's/^\tmodified:   //gp;s/^\tnew file:   //gp;s/^\t//gp;' | xargs git add;
