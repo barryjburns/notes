@@ -2,7 +2,7 @@ GIT := git
 SHELL := bash
 
 push:	commit
-	$(GIT) push origin
+	$(GIT) push --set-upstream origin master
 
 commit:	add
 	$(GIT) commit
